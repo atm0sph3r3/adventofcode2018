@@ -1,9 +1,17 @@
 with open("input/day1", "r") as f:
-    sum = 0
+    frequency_changes = [int(line.strip()) for line in f]
+    all_frequencies = set()
+    current_frequency = 0
+    repeated_frequency = None
 
-    for line in f:
-        new_line = int(line.strip())
-        sum += new_line
+    while repeated_frequency is None:
+        for frequency in frequency_changes:
+            current_frequency += frequency
 
-    print(sum)
+            if current_frequency in all_frequencies:
+                repeated_frequency = current_frequency
+                break
+            else:
+                all_frequencies.add(current_frequency)
 
+    print(repeated_frequency)
