@@ -1,24 +1,21 @@
-from collections import defaultdict
-
 with open('input/day2', 'r') as f:
     ids = [line.strip() for line in f]
 
-    three_letters = 0
-    two_letters = 0
-
     for each_id in ids:
-        lookup = defaultdict(int)
-        for char in each_id:
-            lookup[char] += 1
+        for each_checked_id in ids:
+            number_differed_by = 0
+            differing_position = 0
 
-        found_two = False
-        found_three = False
-        for k, v in lookup.items():
-            if v == 2 and not found_two:
-                two_letters += 1
-                found_two = True
-            if v == 3 and not found_three:
-                three_letters += 1
-                found_three = True
+            for i in range(len(each_id)):
+                if each_id[i] != each_checked_id[i]:
+                    number_differed_by += 1
+                    differing_position = i
 
-    print(three_letters * two_letters)
+                if number_differed_by > 1:
+                    break
+
+            if number_differed_by == 1:
+                if differing_position == len(each_id) - 1:
+                    print(f'{each_id[:differing_position]}')
+                else:
+                    print(f'{each_id[:differing_position]}{each_id[differing_position + 1:]}')
