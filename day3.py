@@ -18,8 +18,19 @@ with open('input/day3', 'r') as f:
                 claims_map[f'{x}x{y}'].append(i + 1)
 
     in_two_or_more = 0
+    independent_ids = defaultdict(lambda: True)
     for k, v in claims_map.items():
         if len(v) >= 2:
             in_two_or_more += 1
 
-    print(in_two_or_more)
+        for each in v:
+            if len(v) == 1:
+                independent_ids[each] &= True
+            else:
+                independent_ids[each] &= False
+
+    print(f'Part one: {in_two_or_more}')
+
+    for k, v in independent_ids.items():
+        if v:
+            print(k)
