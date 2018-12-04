@@ -33,4 +33,4 @@ with open('input/day3', 'r') as f:
 
     for k, v in independent_ids.items():
         if v:
-            print(k)
+            print(f'Part two: {k}')
